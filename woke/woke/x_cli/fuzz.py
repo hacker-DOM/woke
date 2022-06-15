@@ -14,6 +14,8 @@ from woke.a_config import WokeConfig
 from woke.m_fuzz import fuzz
 from .console import console
 
+from woke._common.utils import *
+
 
 def _get_module_name(path: Path, root: Path) -> str:
     path = path.with_suffix("")
@@ -53,6 +55,8 @@ def run_fuzz(
 
     py_files = set()
 
+    log(locals())
+
     for path in paths:
         fuzz_path = Path(path).resolve()
 
@@ -68,7 +72,10 @@ def run_fuzz(
     fuzz_functions = []
 
     sys.path.insert(0, str(config.project_root_path))
+
+    log(py_files)
     for file in py_files:
+        log(file)
         module_name = _get_module_name(file, config.project_root_path)
         module_spec = importlib.util.spec_from_file_location(module_name, file)
         if module_spec is None or module_spec.loader is None:

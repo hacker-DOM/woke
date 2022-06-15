@@ -11,7 +11,7 @@ from woke.a_config import WokeConfig
 
 
 EvmAccount = Union[Account, ProjectContract]
-TxnConfig = TypedDict("TxnConfig", {"from": EvmAccount})
+TxnConfig = TypedDict("TxnConfig", {"from": EvmAccount, "amount": int})
 
 
 def _sol_to_py(sol: str, input: bool) -> str:
